@@ -12,16 +12,26 @@ const { Server } = require("socket.io");
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors : {
-    origin : ['https://localhost:3000']
+    origin : ['http://localhost:3000']
 } });
 
 io.on("connection", (socket) => {
   console.log('client connected');
+
+  socket.on('sendmsg', (data) => {
+    console.log(data);
+    data.sent = false;
+    socket.to(data.room).emit('recmsg', data);
+  })
+
+  socket.on('joinroom', (roomname) => {
+    socket.join(roomname);
+  })
 });
 
 app.use(express.json());
 app.use(cors({
-    origin : ['https://localhost:3000']
+    origin : ['http://localhost:3000']
 }));
 app.use('/user',userRouter);
 

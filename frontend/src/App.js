@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 // import NotFound from './components/NotFound';
 // import Header from './components/Header';
 import {io} from 'socket.io-client';
+import Header from './components/Header';
+import Room from './components/Room';
 
 
 
@@ -26,6 +28,7 @@ function App() {
     <div>
   
       <BrowserRouter>
+      <Header/>
       {/* <Header /> */}
         {/* <Link className='btn btn-link' to="/home">Home</Link>
         <Link className='btn btn-outline-primary' to="/login">Login</Link> */}
@@ -34,7 +37,8 @@ function App() {
           {/* <Route element={<Home></Home>} path="home" />   */}
             <Route element={<Login></Login>} path="login" />
             <Route element={<Signup></Signup>} path="Signup" />
-            <Route element={<ChatRoom></ChatRoom>} path="ChatRoom"/>
+            <Route element={<ChatRoom socket={socket}></ChatRoom>} path="ChatRoom/:roomName"/>
+            <Route element={<Room />} path="room"/>
 
         </Routes>
       </BrowserRouter>

@@ -63,11 +63,11 @@ router.delete("/delete/:id", (req, res) => {
     });
 });
 router.post("/authenticate", (req, res) => {
-  console.log(req, body);
-  console.log(formdata);
+  console.log(req.body);
+  let formdata = req.body;
   // Model.findOne({email : formdata.email,password : formdata.password})
   Model.findOne({ email: formdata.email })
-    .than((result) => {
+    .then((result) => {
       //logi for valadating usercreadebtials
       //if email and password matched then result will contain their data
 
