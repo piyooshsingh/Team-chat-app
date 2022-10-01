@@ -5,7 +5,7 @@ import Swal from "sweetalert2"
 
 const SigUp = () => {
   
-
+  const navigate = useNavigate();
   const userSubmit=async(formdata)=>{
     console.log(formdata);
     const response = await fetch('http://localhost:5000/user/add', {
@@ -23,6 +23,7 @@ const SigUp = () => {
         title : 'Nice',
         text : 'User SigUp!!'
       })
+      navigate('/login');
     }else{
       console.log('some error occured');
     }
